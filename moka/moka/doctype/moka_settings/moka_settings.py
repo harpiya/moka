@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T00:27:36+03:00
+# @Last modified time: 2019-01-19T00:32:58+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -27,7 +27,8 @@ def log(*args, **kwargs):
 
 class MokaSettings(Document):
 	service_name = "Moka"
-	supported_currencies = ["TRY, USD, EUR"]
+	supported_currencies = ["AUD", "BRL", "CAD", "CZK", "DKK", "EUR", "HKD", "HUF", "ILS", "JPY", "MYR", "MXN",
+		"TWD", "NZD", "NOK", "PHP", "PLN", "GBP", "RUB", "SGD", "SEK", "CHF", "THB", "TRY", "USD"]
 	is_embedable = True
 
 	def __setup__(self):
@@ -73,9 +74,9 @@ class MokaSettings(Document):
 	def validate_moka_credentails(self):
 		pass
 
-	#def validate_transaction_currency(self, currency):
-	#	if currency not in self.supported_currencies:
-	#		frappe.throw(_("Please select another payment method. {0} does not support transactions in currency \"{1}\"").format(self.service_name, currency))
+	def validate_transaction_currency(self, currency):
+		if currency not in self.supported_currencies:
+			frappe.throw(_("Please select another payment method. {0} does not support transactions in currency \"{1}\"").format(self.service_name, currency))
 
 	def build_moka_request(self, **kwargs):
 		"""Creates an Moka Request record to keep params off the url"""
