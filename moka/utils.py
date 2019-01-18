@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: utils.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T00:01:18+03:00
+# @Last modified time: 2019-01-19T01:41:59+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -34,7 +34,7 @@ CARDS = {
 def get_contact(contact_name = None):
 	user = session.user
 	contact = None
-	if isinstance(user, unicode):
+	if isinstance(user, str):
 		user = frappe.get_doc("User", user)
 
 	if not contact_name:
