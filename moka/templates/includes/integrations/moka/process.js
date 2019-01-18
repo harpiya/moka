@@ -5,7 +5,7 @@
  * @Project: Harpiya Kurumsal Yönetim Sistemi
  * @Filename: process.js
  * @Last modified by:   developer
- * @Last modified time: 2019-01-19T01:29:35+03:00
+ * @Last modified time: 2019-01-19T01:52:04+03:00
  * @License: MIT License. See license.txt
  * @Copyright: Harpiya Yazılım Teknolojileri
  */
@@ -203,15 +203,15 @@ frappe.integration_service.moka_gateway = Class.extend({
 			}
 		};
 
-		$('#authorizenet_exp_month').on("change keyup", function() {
+		$('#moka_exp_month').on("change keyup", function() {
 			limit_digit_input.bind(this)(2);
 		});
 
-		$('#authorizenet_exp_year').on("change keyup", function() {
+		$('#moka_exp_year').on("change keyup", function() {
 			limit_digit_input.bind(this)(4);
 		});
 
-		$('#authorizenet_code').on("change keyup", function() {
+		$('#moka_code').on("change keyup", function() {
 			limit_digit_input.bind(this)(4);
 		})
 
