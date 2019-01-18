@@ -1,6 +1,14 @@
-# -*- coding: utf-8 -*-
-# Copyright (c) 2015, DigiThinkIT, Inc. and contributors
-# For license information, please see license.txt
+# @Author: Saadettin Yasir AKEL <developer>
+# @Date:   2019-01-18T21:19:17+03:00
+# @Email:  yasir@harpiya.com
+# @Project: Harpiya Kurumsal Yönetim Sistemi
+# @Filename: moka_request.py
+# @Last modified by:   developer
+# @Last modified time: 2019-01-18T23:55:36+03:00
+# @License: MIT License. See license.txt
+# @Copyright: Harpiya Yazılım Teknolojileri
+
+
 
 from __future__ import unicode_literals
 import frappe
@@ -14,7 +22,7 @@ LOG_LEVELS = {
 	"Debug": 3
 }
 
-class AuthorizeNetRequest(Document):
+class MokaRequest(Document):
 
 	def max_log_level(self, level):
 		self._max_log_level = LOG_LEVELS[level]
@@ -22,7 +30,7 @@ class AuthorizeNetRequest(Document):
 	def log_action(self, data, level):
 		if LOG_LEVELS[level] <= self._max_log_level:
 			self.append("log",{
-				"doctype": "AuthorizeNet Request Log",
+				"doctype": "Moka Request Log",
 				"log": data,
 				"level": level,
 				"timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")

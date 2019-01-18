@@ -1,6 +1,20 @@
+/**
+ * @Author: Saadettin Yasir AKEL <developer>
+ * @Date:   2019-01-18T21:18:29+03:00
+ * @Email:  yasir@harpiya.com
+ * @Project: Harpiya Kurumsal Yönetim Sistemi
+ * @Filename: moka_embed.js
+ * @Last modified by:   developer
+ * @Last modified time: 2019-01-18T23:56:55+03:00
+ * @License: MIT License. See license.txt
+ * @Copyright: Harpiya Yazılım Teknolojileri
+ */
+
+
+
 frappe.provide("frappe.gateway_selector")
 
-frappe.gateway_selector.authorizenet_embed =  frappe.integration_service.authorizenet_gateway.extend({
+frappe.gateway_selector.moka_embed =  frappe.integration_service.moka_gateway.extend({
   _initialized: false,
 
   /**
@@ -43,12 +57,12 @@ frappe.gateway_selector.authorizenet_embed =  frappe.integration_service.authori
     this.collect()
 
     var stored_payment_label = false;
-    if ( this.process_data.authorizenet_profile && this.process_data.authorizenet_profile.payment_id ) {
+    if ( this.process_data.moka_profile && this.process_data.moka_profile.payment_id ) {
       stored_payment_label = $('input[name="authorizednet-stored-payment"]:checked').siblings('.long-text').html();
     }
 
-    return frappe.render(frappe.templates.authorizenet_summary, Object.assign({
-        store_payments: $('#authorizenet_store_payment').is(':checked'),
+    return frappe.render(frappe.templates.moka_summary, Object.assign({
+        store_payments: $('#moka_store_payment').is(':checked'),
         stored_payment_label: stored_payment_label
       }, this.process_data));
   }
