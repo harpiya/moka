@@ -1,13 +1,27 @@
+/**
+ * @Author: Saadettin Yasir AKEL <developer>
+ * @Date:   2019-01-18T21:16:35+03:00
+ * @Email:  yasir@harpiya.com
+ * @Project: Harpiya Kurumsal Yönetim Sistemi
+ * @Filename: process.js
+ * @Last modified by:   developer
+ * @Last modified time: 2019-01-19T01:29:35+03:00
+ * @License: MIT License. See license.txt
+ * @Copyright: Harpiya Yazılım Teknolojileri
+ */
+
+
+
 frappe.provide("frappe.integration_service")
 
-frappe.integration_service.authorizenet_gateway = Class.extend({
+frappe.integration_service.moka_gateway = Class.extend({
 	card_fields: {
-		"authorizenet_name": "name_on_card",
-		"authorizenet_number": "card_number",
-		"authorizenet_code": "card_code",
-		"authorizenet_exp_month": "exp_month",
-		"authorizenet_exp_year": "exp_year",
-		"authorizenet_store_payment": "store_payment"
+		"moka_name": "name_on_card",
+		"moka_number": "card_number",
+		"moka_code": "card_code",
+		"moka_exp_month": "exp_month",
+		"moka_exp_year": "exp_year",
+		"moka_store_payment": "store_payment"
 	},
 
 	init: function(addressForm, embedForm, selector) {
@@ -23,8 +37,8 @@ frappe.integration_service.authorizenet_gateway = Class.extend({
 			var result = this.addressForm.validate();
 			billing_info = $.extend({}, result.address);
 
-			if ( $('#authorizenet_zipcode').length > 0 ) {
-				billing_info["pincode"] = $('#authorizenet_zipcode').val();
+			if ( $('#moka_zipcode').length > 0 ) {
+				billing_info["pincode"] = $('#moka_zipcode').val();
 			}
 		}
 
@@ -91,7 +105,7 @@ frappe.integration_service.authorizenet_gateway = Class.extend({
 				return frappe.call({
 					method: 'frappe.client.delete',
 					args: {
-						doctype: "AuthorizeNet Stored Payment",
+						doctype: "Moka Stored Payment",
 						name: stored_payment
 					},
 					callback: function() {
@@ -239,13 +253,13 @@ frappe.integration_service.authorizenet_gateway = Class.extend({
 		this._process({
 			card_info: card_info,
 			billing_info: billing_info,
-			authorizenet_profile: stored_payment_options
+			moka_profile: stored_payment_options
 		}, request_name, callback);
 	},
 
 	_process: function(data, request_name, callback) {
 		frappe.call({
-			method: "authorizenet.authorizenet.doctype.authorizenet_settings.authorizenet_settings.process",
+			method: "moka.moka.doctype.moka_settings.moka_settings.process",
 			freeze: 1,
 			freeze_message: "Processing Order. Please Wait...",
 			args: {
@@ -335,7 +349,7 @@ frappe.integration_service.authorizenet_gateway = Class.extend({
 		this.process_data = {
 			card_info: card_info,
 			billing_info: billing_info,
-			authorizenet_profile: stored_payment_options
+			moka_profile: stored_payment_options
 		}
 	},
 
@@ -347,63 +361,63 @@ frappe.integration_service.authorizenet_gateway = Class.extend({
 		var address = {};
 
 		// stored payment path
-		if ( this.process_data.authorizenet_profile &&
-				 this.process_data.authorizenet_profile.payment_id ) {
+		if ( this.process_data.moka_profile &&
+				 this.process_data.moka_profile.payment_id ) {
 			valid = true;
-			address["address"] = this.process_data.authorizenet_profile.address_name;
+			address["address"] = this.process_data.moka_profile.address_name;
 		} else {
 			// manual entry path
 			if ( !this.process_data.card_info.name_on_card ) {
 				valid = false;
-				error['authorizenet_name'] = "Credit Card Name is required";
+				error['moka_name'] = "Credit Card Name is required";
 			}
 
 			if ( !this.process_data.card_info.card_number ) {
 				valid = false;
-				error['authorizenet_number'] = "Credit Card Number is required";
+				error['moka_number'] = "Credit Card Number is required";
 			}
 
 			if ( !this.process_data.card_info.card_code ) {
 				valid = false;
-				error['authorizenet_code'] = "Security Code is required";
+				error['moka_code'] = "Security Code is required";
 			}
 
 			if ( !this.process_data.card_info.exp_month ) {
 				valid = false;
-				error['authorizenet_exp_month'] = "Exp Month is required";
+				error['moka_exp_month'] = "Exp Month is required";
 			}
 
 			if ( !this.process_data.card_info.exp_year ) {
 				valid = false;
-				error['authorizenet_exp_year'] = "Exp Year is required";
+				error['moka_exp_year'] = "Exp Year is required";
 			}
 
 			if ( this.selector.is_backend ) {
 				if ( !this.process_data.billing_info.pincode ) {
 					valid = false;
-					error['authorizenet_bill_pincode'] = "Postal Code is required";
+					error['moka_bill_pincode'] = "Postal Code is required";
 				}
 			}
 
 			if ( this.process_data.billing_info && !this.selector.is_backend ) {
 				if ( !this.process_data.billing_info.address_1 ) {
 					valid = false;
-					error['authorizenet_bill_line1'] = "Address line 1 is required";
+					error['moka_bill_line1'] = "Address line 1 is required";
 				}
 
 				if ( !this.process_data.billing_info.city ) {
 					valid = false;
-					error['authorizenet_bill_city'] = "City is required";
+					error['moka_bill_city'] = "City is required";
 				}
 
 				if ( !this.process_data.billing_info.pincode ) {
 					valid = false;
-					error['authorizenet_bill_pincode'] = "Postal Code is required";
+					error['moka_bill_pincode'] = "Postal Code is required";
 				}
 
 				if ( !this.process_data.billing_info.country ) {
 					valid = false;
-					error['authorizenet_bill_country'] = "Postal Code is required";
+					error['moka_bill_country'] = "Postal Code is required";
 				}
 
 				// copy address for awc

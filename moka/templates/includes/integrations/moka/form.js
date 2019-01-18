@@ -1,8 +1,22 @@
+/**
+ * @Author: Saadettin Yasir AKEL <developer>
+ * @Date:   2019-01-18T21:16:35+03:00
+ * @Email:  yasir@harpiya.com
+ * @Project: Harpiya Kurumsal Yönetim Sistemi
+ * @Filename: form.js
+ * @Last modified by:   developer
+ * @Last modified time: 2019-01-19T01:28:18+03:00
+ * @License: MIT License. See license.txt
+ * @Copyright: Harpiya Yazılım Teknolojileri
+ */
+
+
+
 frappe.provide("frappe.integration_service")
 
-{% include "templates/includes/integrations/authorizenet/process.js" with context %}
+{% include "templates/includes/integrations/moka/process.js" with context %}
 
-frappe.integration_service.authorizenet_gateway =  frappe.integration_service.authorizenet_gateway.extend({
+frappe.integration_service.moka_gateway =  frappe.integration_service.moka_gateway.extend({
   form: function(reference_id, display_errors) {
     this._super();
     var base = this;
