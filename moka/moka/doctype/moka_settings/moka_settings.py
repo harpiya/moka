@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-18T23:38:55+03:00
+# @Last modified time: 2019-01-19T00:10:47+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -27,7 +27,7 @@ def log(*args, **kwargs):
 
 class MokaSettings(Document):
 	service_name = "Moka"
-	supported_currencies = ["TL, USD, EUR"]
+	supported_currencies = ["TRY, USD, EUR"]
 	is_embedable = True
 
 	def __setup__(self):
