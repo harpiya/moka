@@ -6,15 +6,15 @@
 
 {% block script %}
 <script>
-	{% include "templates/includes/integrations/authorizenet/form.js" %}
-	var authorizenet_gateway = new frappe.integration_service.authorizenet_gateway();
-	authorizenet_gateway.form('{{request_name}}', true);
+	{% include "templates/includes/integrations/moka/form.js" %}
+	var moka_gateway = new frappe.integration_service.moka_gateway();
+	moka_gateway.form('{{request_name}}', true);
 </script>
 {% endblock %}
 
 {%- block page_content -%}
 <div id="authorizenet-sa-form">
-	{% include "templates/includes/integrations/authorizenet/checkout_form.html" with context %}
+	{% include "templates/includes/integrations/moka/checkout_form.html" with context %}
 </div>
 {% endblock %}
 
@@ -23,6 +23,6 @@
 	header, footer {
 		display: none;
 	}
-	{% include "templates/includes/integrations/authorizenet/css/checkout.css" %}
+	{% include "templates/includes/integrations/moka/css/checkout.css" %}
 </style>
 {% endblock %}
