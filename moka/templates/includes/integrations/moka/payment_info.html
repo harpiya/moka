@@ -1,0 +1,63 @@
+<form id="authorizenet-payment-form" class="authorizenet-form">
+  <div class="row no-gutter">
+    <div class="col-sm-12">
+      <div class="field required">
+        <label for="authorizenet_name">Name on Card</label>
+        <input id="authorizenet_name" name="authorizenet_name" placeholder="Name on Card"/>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutter">
+    <div class="col-sm-12">
+      <div class="field required">
+        <label for="authorizenet_number">Card Number</label>
+        <input id="authorizenet_number" name="authorizenet_number" placeholder="Card Number"/>
+      </div>
+    </div>
+  </div>
+	<div class="row no-gutter">
+		<div class="col-xs-4">
+			<div class="field required">
+        <label for="authorizenet_exp_month">Exp Month</label>
+        <input id="authorizenet_exp_month" name="authorizenet_exp_month" placeholder="MM" length="2" type="text"/>
+      </div>
+		</div>
+		<div class="col-xs-4">
+			<div class="field required">
+        <label for="authorizenet_exp_year">Exp Year</label>
+        <input id="authorizenet_exp_year" name="authorizenet_exp_year" placeholder="YYYY" length="4" type="text"/>
+      </div>
+		</div>
+		<div class="col-xs-4">
+      <div class="field required">
+        <label for="authorizenet_code">Card Code</label>
+        <input id="authorizenet_code" name="authorizenet_code" placeholder="Card Code" length="4" type="text"/>
+      </div>
+    </div>
+	</div>
+	{% if is_backend %}
+	<div class="row no-gutter">
+		<div class="col-xs-12 nopad-left">
+      <div class="field required">
+        <label for="authorizenet_zipcode">Postal Code</label>
+        <input id="authorizenet_zipcode" name="pincode" placeholder="Postal Code" data-type="pincode" maxlength="35"/>
+      </div>
+    </div>
+	</div>
+	{% endif %}
+	<!--
+  <div class="row no-gutter">
+    <div class="col-sm-12">
+      <div class="field custom">
+        <label class="switch-field">
+          <div class="switch-text">Store payment information for faster checkout.</div>
+          <div class="switch">
+            <input type="checkbox" id="authorizenet_store_payment" name="authorizenet_store_payment">
+            <div class="slider"></div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+-->
+</form>
