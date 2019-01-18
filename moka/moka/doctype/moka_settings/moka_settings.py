@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T00:53:39+03:00
+# @Last modified time: 2019-01-19T01:39:57+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -436,7 +436,7 @@ def process(options, request_name=None):
 	data = {}
 
 	# handles string json as well as dict argument
-	if isinstance(options, basestring):
+	if isinstance(options, str):
 		options = json.loads(options)
 
 	# fixes bug where js null value is casted as a string
