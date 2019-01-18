@@ -1,3 +1,15 @@
+# @Author: Saadettin Yasir AKEL <developer>
+# @Date:   2019-01-18T21:18:16+03:00
+# @Email:  yasir@harpiya.com
+# @Project: Harpiya Kurumsal Yönetim Sistemi
+# @Filename: moka_checkout.py
+# @Last modified by:   developer
+# @Last modified time: 2019-01-19T01:04:34+03:00
+# @License: MIT License. See license.txt
+# @Copyright: Harpiya Yazılım Teknolojileri
+
+
+
 from __future__ import unicode_literals
 
 import frappe
@@ -7,8 +19,6 @@ from frappe.utils.formatters import format_value
 
 import json
 from datetime import datetime
-
-from authorizenet.utils import get_authorizenet_user
 
 no_cache = 1
 no_sitemap = 1
@@ -25,9 +35,9 @@ def get_context(context):
         path_parts = context.get("pathname", "").split('/')
         request_name = path_parts[-1]
 
-    # attempt to fetch AuthorizeNet Request record
+    # attempt to fetch Moka Request record
     try:
-        request = frappe.get_doc("AuthorizeNet Request", request_name)
+        request = frappe.get_doc("Moka Request", request_name)
     except Exception as ex:
         request = None
 
@@ -38,7 +48,7 @@ def get_context(context):
         raise frappe.Redirect
 
     # list countries for billing address form
-    context["authorizenet_countries"] = frappe.get_list("Country", fields=["country_name", "name"])
+    context["moka_countries"] = frappe.get_list("Country", fields=["country_name", "name"])
 
     if request_name and request:
         for key in expected_keys:
@@ -49,10 +59,6 @@ def get_context(context):
 
         context["request_name"] = request_name
         context["year"] = datetime.today().year
-
-        # get the authorizenet user record
-        authnet_user = get_authorizenet_user()
-        print(authnet_user)
 
         if authnet_user:
             context["stored_payments"] = authnet_user.get("stored_payments", [])
