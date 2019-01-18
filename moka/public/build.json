@@ -1,4 +1,4 @@
-moka{
+{
   "js/moka_settings.js": [
     "moka/doctype/moka_settings/moka_settings.js"
   ],
