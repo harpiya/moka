@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_checkout.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T01:04:34+03:00
+# @Last modified time: 2019-01-20T00:16:56+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -60,8 +60,6 @@ def get_context(context):
         context["request_name"] = request_name
         context["year"] = datetime.today().year
 
-        if authnet_user:
-            context["stored_payments"] = authnet_user.get("stored_payments", [])
 
 
     else:
