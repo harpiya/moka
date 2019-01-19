@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T00:36:07+03:00
+# @Last modified time: 2019-01-20T00:44:40+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -259,7 +259,7 @@ class MokaSettings(Document):
 			request.log_action(json.dumps(result), "Debug")
 
 			# if all went well, record transaction id
-			request.transaction_id = result.transaction_response.trans_id
+			request.transaction_id = result.Data
 			request.status = "Success"
 			request.flags.ignore_permissions = 1
 
@@ -289,13 +289,13 @@ class MokaSettings(Document):
 			request.error_msg = ex.text
 
 			redirect_message = str(ex)
-			if result and hasattr(result, 'transaction_response'):
+			if result and hasattr(result, 'ResultCode'):
 				# if there is extra transaction data, log it
-				errors = result.transaction_response.errors
+				errors = result.ResultCode
 				request.log_action("\n".join([err.error_text for err in errors]), "Error")
 				request.log_action(frappe.get_traceback(), "Error")
 
-				request.transaction_id = result.transaction_response.trans_id
+				request.transaction_id = result.Data
 				redirect_message = "Success"
 
 			pass
