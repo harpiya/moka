@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T02:51:22+03:00
+# @Last modified time: 2019-01-20T02:52:44+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
