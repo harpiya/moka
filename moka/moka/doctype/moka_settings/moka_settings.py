@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T02:06:54+03:00
+# @Last modified time: 2019-01-20T02:12:39+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -205,10 +205,31 @@ class MokaSettings(Document):
 				"order": {
 					"invoice_number": data["order_id"]
 				},
-				"amount": flt(self.process_data.get("amount")),
-				"email": email,
-				"description": self.card_info.get("name_on_card"),
-				"customer_type": "individual"
+				"PaymentDealerRequest": {
+					"CardHolderFullName": "Ali Yılmaz",
+					"CardNumber": "5555666677778888",
+					"ExpMonth": "12",
+					"ExpYear": "2019",
+					"CvcNumber": "123",
+					"Amount": 35.5,
+					"Currency": "TL",
+					"InstallmentNumber": "1",
+					"ClientIP": "195.155.96.234",
+					"OtherTrxCode": "123456",
+					"IsPreAuth": 0,
+					"IsPoolPayment": 0,
+					"IntegratorId": 3,
+					"Software": "OpenCart",
+					"RedirectUrl": "https://pos.testmoka.com/DealerPayment/PayResult?MyTrxId=1A2B3CD456",
+					"RedirectType": 0,
+					"Description": "test açıklama",
+					"BuyerInformation": {
+						"BuyerFullName": "Elif Yetimoğlu",
+						"BuyerEmail": "elif@elif.com",
+						"BuyerGsmNumber": "1111111111",
+						"BuyerAddress": "Cumhuriyet Mahallesi Taşdelen/Çekmeköy"
+					}
+				}
 			}
 
 			# track ip for tranasction records
