@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T23:58:01+03:00
+# @Last modified time: 2019-01-20T00:03:19+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -307,8 +307,8 @@ class MokaSettings(Document):
 			log(frappe.get_traceback())
 			# any other errors
 			request.log_action(frappe.get_traceback(), "Error")
-			request.status = "Error"
-			request.error_msg = "[UNEXPECTED ERROR]: {0}".format(ex)
+			request.Data = "null"
+			request.ResultMessage = "[UNEXPECTED ERROR]: {0}".format(ex)
 			pass
 
 		return request, redirect_to, redirect_message
