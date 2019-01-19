@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T00:29:25+03:00
+# @Last modified time: 2019-01-20T00:36:07+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -248,8 +248,8 @@ class MokaSettings(Document):
 				transaction_data["billing"]["last_name"] = last_name
 
 			# include line items if available
-			if self.process_data.get("line_items"):
-				transaction_data["line_items"] = self.process_data.get("line_items")
+			#if self.process_data.get("line_items"):
+			#	transaction_data["line_items"] = self.process_data.get("line_items")
 
 			request.log_action("Requesting Transaction: %s" % \
 				json.dumps(transaction_data), "Debug")
