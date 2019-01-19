@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T01:47:06+03:00
+# @Last modified time: 2019-01-20T02:06:54+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -259,8 +259,8 @@ class MokaSettings(Document):
 			request.log_action(json.dumps(result), "Debug")
 
 			# if all went well, record transaction id
-			request.transaction_id = result
-			request.status = "Success"
+			#request.transaction_id = result.get('ResultCode')[0]
+			request.status = result.get('ResultCode') == "Success"
 			request.flags.ignore_permissions = 1
 
 		except MokaInvalidError as iex:
