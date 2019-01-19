@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T23:47:16+03:00
+# @Last modified time: 2019-01-19T23:52:21+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -314,6 +314,8 @@ class MokaSettings(Document):
 			request.status = "Error"
 			request.error_msg = "[UNEXPECTED ERROR]: {0}".format(ex)
 			pass
+
+		return request, redirect_to, redirect_message
 
 
 	def create_request(self, data):
