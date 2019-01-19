@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T23:09:45+03:00
+# @Last modified time: 2019-01-19T23:26:20+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -262,7 +262,7 @@ class MokaSettings(Document):
 				json.dumps(transaction_data), "Debug")
 
 			# performt transaction finally
-			result = make_post_request(url="https://service.testmoka.com/PaymentDealer/DoDirectPaymentThreeD", data=transaction_data)
+			result = make_post_request(url="https://service.testmoka.com/PaymentDealer/DoDirectPaymentThreeD", data=json.dumps(transaction_data))
 			request.log_action(json.dumps(result), "Debug")
 
 			# if all went well, record transaction id
