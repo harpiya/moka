@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T01:43:54+03:00
+# @Last modified time: 2019-01-19T23:09:45+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -173,10 +173,6 @@ class MokaSettings(Document):
 						request.status = "Error"
 						return request,	None, "Missing field: %s" % f, {}
 
-			# prepare authorize api
-
-			api_url = "https://service.testmoka.com/PaymentDealer/DoDirectPaymentThreeD"
-
 
 			# cache billing fields as per authorize api
 			billing = moka_address(self.billing_info)
@@ -204,6 +200,10 @@ class MokaSettings(Document):
 
 			# build transaction data
 			transaction_data = {
+				"PaymentDealerAuthentication": {
+					settings,
+					checkKey
+				},
 				"order": {
 					"invoice_number": data["order_id"]
 				},
@@ -262,7 +262,7 @@ class MokaSettings(Document):
 				json.dumps(transaction_data), "Debug")
 
 			# performt transaction finally
-			result = make_post_request(url=api_url, data=transaction_data0)
+			result = make_post_request(url="https://service.testmoka.com/PaymentDealer/DoDirectPaymentThreeD", data=transaction_data)
 			request.log_action(json.dumps(result), "Debug")
 
 			# if all went well, record transaction id
