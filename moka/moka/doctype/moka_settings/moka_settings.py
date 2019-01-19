@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T00:16:18+03:00
+# @Last modified time: 2019-01-20T00:24:12+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -197,7 +197,10 @@ class MokaSettings(Document):
 			# build transaction data
 			transaction_data = {
 				"PaymentDealerAuthentication": {
-					settings,
+					"DealerCode": "1991",
+					"Username": "TestSemih",
+					"Password": "UHD8Y28Y473EGY",
+					"CheckKey":  "e9173cf746029f6a4c7d345f6c2f761805bbff08d2a990cd55748378189a2e76"
 				},
 				"order": {
 					"invoice_number": data["order_id"]
