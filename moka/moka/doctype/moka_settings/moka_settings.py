@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T00:44:40+03:00
+# @Last modified time: 2019-01-20T01:38:36+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -255,11 +255,11 @@ class MokaSettings(Document):
 				json.dumps(transaction_data), "Debug")
 
 			# performt transaction finally
-			result = make_post_request(url="https://service.testmoka.com/PaymentDealer/DoDirectPaymentThreeD", data=json.dumps(transaction_data))
+			result = make_post_request(url="https://service.testmoka.com/PaymentDealer/DoDirectPaymentThreeD", data=transaction_data)
 			request.log_action(json.dumps(result), "Debug")
 
 			# if all went well, record transaction id
-			request.transaction_id = result.Data
+			request.transaction_id = result.get('Data')[0]
 			request.status = "Success"
 			request.flags.ignore_permissions = 1
 
@@ -295,7 +295,7 @@ class MokaSettings(Document):
 				request.log_action("\n".join([err.error_text for err in errors]), "Error")
 				request.log_action(frappe.get_traceback(), "Error")
 
-				request.transaction_id = result.Data
+				request.transaction_id = result.get('Data')[0]
 				redirect_message = "Success"
 
 			pass
