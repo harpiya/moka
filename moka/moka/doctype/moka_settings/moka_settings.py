@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T23:36:04+03:00
+# @Last modified time: 2019-01-19T23:47:16+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -325,7 +325,7 @@ class MokaSettings(Document):
 		self.billing_info = self.process_data.get("billing_info")
 		self.shipping_info = self.process_data.get("shipping_info")
 		redirect_url = ""
-		request, redirect_to, redirect_message
+		request, redirect_to, redirect_message = self.process_payment()
 
 		if self.process_data.get('creation'):
 			del self.process_data['creation']
