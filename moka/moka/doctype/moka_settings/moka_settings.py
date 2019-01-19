@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T23:26:20+03:00
+# @Last modified time: 2019-01-19T23:36:04+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -119,7 +119,7 @@ class MokaSettings(Document):
 
 	def process_payment(self):
 		# used for feedback about which payment was used
-		moka_data = {}
+		#moka_data = {}
 		# the current logged in contact
 		contact = get_contact()
 		# the cc data available
@@ -325,7 +325,7 @@ class MokaSettings(Document):
 		self.billing_info = self.process_data.get("billing_info")
 		self.shipping_info = self.process_data.get("shipping_info")
 		redirect_url = ""
-		request, redirect_to, redirect_message, moka_data = self.process_payment()
+		request, redirect_to, redirect_message
 
 		if self.process_data.get('creation'):
 			del self.process_data['creation']
@@ -421,7 +421,6 @@ class MokaSettings(Document):
 			"redirect_to": redirect_url,
 			"error": redirect_message if status == "Failed" else None,
 			"status": status,
-			"moka_data": moka_data
 		}
 
 
