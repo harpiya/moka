@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T02:45:35+03:00
+# @Last modified time: 2019-01-20T02:48:42+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -310,7 +310,7 @@ class MokaSettings(Document):
 			if result and hasattr(result):
 				# if there is extra transaction data, log it
 				errors = result.get('ResultCode')
-				request.log_action("\n".join(errors, "Error")
+				request.log_action("\n".join(errors, "Error"))
 				request.log_action(frappe.get_traceback(), "Error")
 
 				request.transaction_id = result.get('ResultCode') == "Success"
