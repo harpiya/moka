@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T00:06:39+03:00
+# @Last modified time: 2019-01-20T00:16:18+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -198,7 +198,6 @@ class MokaSettings(Document):
 			transaction_data = {
 				"PaymentDealerAuthentication": {
 					settings,
-					checkKey
 				},
 				"order": {
 					"invoice_number": data["order_id"]
@@ -263,13 +262,13 @@ class MokaSettings(Document):
 
 			# if all went well, record transaction id
 			request.transaction_id = result.transaction_response.trans_id
-			request.ResultCode = "Success"
+			request.status = "Success"
 			request.flags.ignore_permissions = 1
 
 		except MokaInvalidError as iex:
 			# log validation errors
 			request.log_action(frappe.get_traceback(), "Error")
-			request.ResultMessage = "Error"
+			request.status = "Error"
 			error_msg = ""
 			errors = []
 
@@ -288,7 +287,7 @@ class MokaSettings(Document):
 			result = ex.full_response
 			request.log_action(json.dumps(result), "Debug")
 			request.log_action(str(ex), "Error")
-			request.ResultMessage = "Error"
+			request.status = "Error"
 			request.error_msg = ex.text
 
 			redirect_message = str(ex)
@@ -307,8 +306,8 @@ class MokaSettings(Document):
 			log(frappe.get_traceback())
 			# any other errors
 			request.log_action(frappe.get_traceback(), "Error")
-			request.Data = "null"
-			request.ResultMessage = "[UNEXPECTED ERROR]: {0}".format(ex)
+			request.status = "Error"
+			request.error_msg = "[UNEXPECTED ERROR]: {0}".format(ex)
 			pass
 
 		return request, redirect_to, redirect_message
