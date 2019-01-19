@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T23:54:55+03:00
+# @Last modified time: 2019-01-19T23:58:01+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -18,7 +18,7 @@ from frappe.integrations.utils import create_request_log, create_payment_gateway
 import json
 import hashlib
 from datetime import datetime
-from six.moves.urllib.parse import urlencode
+import urllib.parse
 
 from moka.exceptions import MokaResponseError, MokaInvalidError
 from moka.utils import get_card_accronym, moka_address, get_contact
@@ -393,9 +393,9 @@ class MokaSettings(Document):
 			if redirect_to == "orders":
 				redirect_to = "/orders"
 
-			params.append(urllib.urlencode({"redirect_to": redirect_to}))
+			params.append(urllib.parse.urlencode({"redirect_to": redirect_to}))
 		if redirect_message:
-			params.append(urllib.urlencode({"redirect_message": redirect_message}))
+			params.append(urllib.parse.urlencode({"redirect_message": redirect_message}))
 
 		if len(params) > 0:
 			redirect_url += "?" + "&".join(params)
