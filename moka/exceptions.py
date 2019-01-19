@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: exceptions.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-18T23:37:22+03:00
+# @Last modified time: 2019-01-20T01:29:50+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -26,12 +26,12 @@ class MokaResponseError(MokaError):
     """Error response code returned from API."""
 
     def __init__(self, errorCode, status, full_response):
-        self.errorCode = errorCode
-        self.errorMessage = errorMessage
+        self.ResultCode = ResultCode
+        self.ResultMessage = ResultMessage
         self.full_response = full_response
 
     def __str__(self):
-        return '%s: %s' % (self.errorCode, self.errorMessage)
+        return '%s: %s' % (self.ResultCode, self.ResultMessage)
 
 
 class MokaInvalidError(MokaError, Invalid):
