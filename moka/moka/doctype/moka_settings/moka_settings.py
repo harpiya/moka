@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T02:12:39+03:00
+# @Last modified time: 2019-01-20T02:16:14+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -317,7 +317,7 @@ class MokaSettings(Document):
 				request.log_action(frappe.get_traceback(), "Error")
 
 				request.transaction_id = result.get('Data')[0]
-				redirect_message = "Success"
+				redirect_message = result.get('ResultCode') == "Success"
 
 			pass
 
