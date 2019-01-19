@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T00:03:19+03:00
+# @Last modified time: 2019-01-20T00:06:39+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -263,13 +263,13 @@ class MokaSettings(Document):
 
 			# if all went well, record transaction id
 			request.transaction_id = result.transaction_response.trans_id
-			request.status = "Success"
+			request.ResultCode = "Success"
 			request.flags.ignore_permissions = 1
 
 		except MokaInvalidError as iex:
 			# log validation errors
 			request.log_action(frappe.get_traceback(), "Error")
-			request.status = "Error"
+			request.ResultMessage = "Error"
 			error_msg = ""
 			errors = []
 
@@ -288,7 +288,7 @@ class MokaSettings(Document):
 			result = ex.full_response
 			request.log_action(json.dumps(result), "Debug")
 			request.log_action(str(ex), "Error")
-			request.status = "Error"
+			request.ResultMessage = "Error"
 			request.error_msg = ex.text
 
 			redirect_message = str(ex)
