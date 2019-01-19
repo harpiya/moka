@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T02:48:42+03:00
+# @Last modified time: 2019-01-20T02:51:22+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -204,10 +204,10 @@ class MokaSettings(Document):
 				},
 				"PaymentDealerRequest": {
 					"CardHolderFullName": "Ali Yılmaz",
-					"CardNumber": "5555666677778888",
+					"CardNumber": "5269552233334444",
 					"ExpMonth": "12",
-					"ExpYear": "2019",
-					"CvcNumber": "123",
+					"ExpYear": "2022",
+					"CvcNumber": "000",
 					"Amount": 35.5,
 					"Currency": "TL",
 					"InstallmentNumber": "1",
