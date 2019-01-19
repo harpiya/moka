@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T00:24:12+03:00
+# @Last modified time: 2019-01-20T00:29:25+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -246,11 +246,6 @@ class MokaSettings(Document):
 				transaction_data["billing"] = billing
 				transaction_data["billing"]["first_name"] = first_name
 				transaction_data["billing"]["last_name"] = last_name
-
-			if shipping and len(shipping.keys()):
-				transaction_data["shipping"] = billing
-				transaction_data["shipping"]["first_name"] = first_name
-				transaction_data["shipping"]["last_name"] = last_name
 
 			# include line items if available
 			if self.process_data.get("line_items"):
