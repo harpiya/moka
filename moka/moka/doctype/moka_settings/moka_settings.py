@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T02:16:14+03:00
+# @Last modified time: 2019-01-20T02:20:15+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -233,40 +233,40 @@ class MokaSettings(Document):
 			}
 
 			# track ip for tranasction records
-			if frappe.local.request_ip:
-				transaction_data.update({
-					"extra_options": {
-						"customer_ip": frappe.local.request_ip
-					}
-				})
+			#if frappe.local.request_ip:
+			#	transaction_data.update({
+			#		"extra_options": {
+			#			"customer_ip": frappe.local.request_ip
+			#		}
+			#	})
 
 			# use card
 			# see: https://vcatalano.github.io/py-authorize/transaction.html
-			if self.card_info != None:
-				# exp formating for sale/auth api
-				expiration_date = "{0}/{1}".format(
-					self.card_info.get("exp_month"),
-					self.card_info.get("exp_year"))
+			#if self.card_info != None:
+			#	# exp formating for sale/auth api
+			#	expiration_date = "{0}/{1}".format(
+			#		self.card_info.get("exp_month"),
+			#		self.card_info.get("exp_year"))
 
-				transaction_data.update({
-					"credit_card": {
-						"card_number": self.card_info.get("card_number"),
-						"expiration_date": expiration_date,
-						"card_code": self.card_info.get("card_code")
-					}
-				})
-			else:
-				raise "Missing Credit Card Information"
+			#	transaction_data.update({
+			#		"credit_card": {
+			#			"card_number": self.card_info.get("card_number"),
+			#			"expiration_date": expiration_date,
+			#			"card_code": self.card_info.get("card_code")
+			#		}
+			#	})
+			#else:
+			#	raise "Missing Credit Card Information"
 
-			name_parts = self.card_info["name_on_card"].split(' ')
-			first_name = name_parts[0]
-			last_name = " ".join(name_parts[1:])
+			#name_parts = self.card_info["name_on_card"].split(' ')
+			#first_name = name_parts[0]
+			#last_name = " ".join(name_parts[1:])
 
 			# add billing information if available
-			if len(billing.keys()):
-				transaction_data["billing"] = billing
-				transaction_data["billing"]["first_name"] = first_name
-				transaction_data["billing"]["last_name"] = last_name
+			#if len(billing.keys()):
+			#	transaction_data["billing"] = billing
+			#	transaction_data["billing"]["first_name"] = first_name
+			#	transaction_data["billing"]["last_name"] = last_name
 
 			# include line items if available
 			#if self.process_data.get("line_items"):
