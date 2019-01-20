@@ -1,79 +1,41 @@
 # @Author: Saadettin Yasir AKEL <developer>
-# @Date:   2019-01-18T21:16:35+03:00
+# @Date:   2019-01-20T17:55:20+03:00
 # @Email:  yasir@harpiya.com
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: utils.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T01:41:59+03:00
+# @Last modified time: 2019-01-20T21:11:28+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
 
 
-from __future__ import unicode_literals
 import frappe
-from frappe import _, session
+from frappe import _
+from .moka_checkout import set_moka_checkout, validate_transaction_currency
 
-def _range(a,b):
-	return [x for x in range(a,b)]
+def get_payment_url(doc, method):
+	if doc.docstatus == 1:
+		if doc.payment_gateway == "Moka":
+			set_moka_checkout(doc.grand_total, doc.currency, {"doctype": doc.doctype, "docname": doc.name})
+	else:
+		frappe.respond_as_web_page(_("Invalid Payment Request"),
+			_("Payment Request has been canceled by vendor"), success=False,
+			http_status_code=frappe.ValidationError.http_status_code)
 
-CARDS = {
-	'AMEX':         [34, 37],
-	'CHINAUP':      [62, 88],
-	'DinersClub':   _range(300, 305)+[309, 36, 54, 55]+_range(38, 39),
-	'DISCOVER':     [6011, 65] + _range(622126, 622925) + _range(644, 649),
-	'JCB':          _range(3528, 3589),
-	'LASER':        [6304, 6706, 6771, 6709],
-	'MAESTRO':      [5018, 5020, 5038, 5612, 5893, 6304, 6759, 6761, 6762, 6763, 6390],
-	'DANKORT':      [5019],
-	'MASTERCARD':   _range(50, 55),
-	'VISA':         [4],
-	'VISAELECTRON': [4026, 417500, 4405, 4508, 4844, 4913, 4917]
-}
+def validate_price_list_currency(doc, method):
+	'''Called from Shopping Cart Settings hook'''
+	if doc.enabled and doc.enable_checkout:
+		if not doc.payment_gateway_account:
+			doc.enable_checkout = 0
+			return
 
-def get_contact(contact_name = None):
-	user = session.user
-	contact = None
-	if isinstance(user, str):
-		user = frappe.get_doc("User", user)
+		payment_gateway_account = frappe.get_doc("Payment Gateway Account", doc.payment_gateway_account)
 
-	if not contact_name:
-		contact_names = frappe.get_all("Contact", fields=["name"], filters={
-			"user": user.name
-		})
+		if payment_gateway_account.payment_gateway=="Moka":
+			price_list_currency = frappe.db.get_value("Price List", doc.price_list, "currency")
 
-		if not contact_names or len(contact_names) == 0:
-			contact_names = frappe.get_all("Contact", fields=["name"], filters={
-				"email_id": user.email
-			})
+			validate_transaction_currency(price_list_currency)
 
-		if contact_names and len(contact_names) > 0:
-			contact_name = contact_names[0].get("name")
-
-	if contact_name:
-		contact = frappe.get_doc("Contact", contact_name)
-
-	return contact
-
-
-def get_card_accronym(number):
-	card_name = ''
-	card_match_size = 0
-	for name, values in CARDS.items():
-		for digits in values:
-			digits = str(digits)
-			if number.startswith(digits):
-				if len(digits) > card_match_size:
-					card_match_size = len(digits)
-					card_name = name
-
-	return card_name
-
-def moka_address(fields):
-	address = {}
-	if fields is None:
-		return address
-	if fields.get("address_1"):
-		address["address"] = "%s %s %s/%s" % (fields.get("address_1"), fields.get("address_2", ""), fields.get("city"), fields.get('state'))
-		address["address"] = address["address"][:60]
-	return address
+			if price_list_currency != payment_gateway_account.currency:
+				frappe.throw(_("Currency '{0}' of Price List '{1}' should be same as the Currency '{2}' of Payment Gateway Account '{3}'").format(price_list_currency, doc.price_list, payment_gateway_account.currency, payment_gateway_account.name))

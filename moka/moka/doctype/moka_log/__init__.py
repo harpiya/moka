@@ -4,6 +4,6 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: __init__.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T21:19:05+03:00
+# @Last modified time: 2019-01-20T19:32:01+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri

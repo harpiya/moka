@@ -4,15 +4,15 @@ include *.json
 include *.md
 include *.py
 include *.txt
-recursive-include authorizenet *.css
-recursive-include authorizenet *.csv
-recursive-include authorizenet *.html
-recursive-include authorizenet *.ico
-recursive-include authorizenet *.js
-recursive-include authorizenet *.json
-recursive-include authorizenet *.md
-recursive-include authorizenet *.png
-recursive-include authorizenet *.py
-recursive-include authorizenet *.svg
-recursive-include authorizenet *.txt
-recursive-exclude authorizenet *.pyc
+recursive-include paypal_integration *.css
+recursive-include paypal_integration *.csv
+recursive-include paypal_integration *.html
+recursive-include paypal_integration *.ico
+recursive-include paypal_integration *.js
+recursive-include paypal_integration *.json
+recursive-include paypal_integration *.md
+recursive-include paypal_integration *.png
+recursive-include paypal_integration *.py
+recursive-include paypal_integration *.svg
+recursive-include paypal_integration *.txt
+recursive-exclude paypal_integration *.pyc

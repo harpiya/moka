@@ -1,35 +1,25 @@
 # @Author: Saadettin Yasir AKEL <developer>
-# @Date:   2019-01-18T21:16:35+03:00
+# @Date:   2019-01-20T17:55:20+03:00
 # @Email:  yasir@harpiya.com
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: hooks.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-19T01:33:38+03:00
+# @Last modified time: 2019-01-20T19:53:31+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
-
-
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from . import __version__ as app_version
 
 app_name = "moka"
 app_title = "Moka"
-app_publisher = "Harpiya Yazılım Teknolojileri."
+app_publisher = "Harpiya Yazılım Teknolojileri"
 app_description = "Moka Ödeme Sistemi"
-app_icon = "octicon octicon-file-directory"
-app_color = "grey"
+app_icon = "octicon octicon-credit-card"
+app_color = "#179bd7"
 app_email = "info@harpiya.com"
+app_version = "0.0.1"
+hide_in_installer = True
 app_license = "MIT"
-
-
-integration_services = ["Moka"]
-app_include_js = "/assets/js/moka_settings.js"
-
-website_route_rules = [
-	{ "from_route": "/integrations/moka_checkout/<name>", "to_route": "integrations/moka_checkout" }
-]
 
 # Includes in <head>
 # ------------------
@@ -52,9 +42,6 @@ website_route_rules = [
 # role_home_page = {
 #	"Role": "home_page"
 # }
-
-# Website user home page (by function)
-# get_website_user_home_page = "moka.utils.get_home_page"
 
 # Generators
 # ----------
@@ -79,24 +66,26 @@ website_route_rules = [
 # Permissions evaluated in scripted ways
 
 # permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
+#	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
 #
 # has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
+#	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
 # Document Events
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Payment Request": {
+		"validate": "moka.express_checkout.validate_moka_credentials",
+		"get_payment_url": "moka.utils.get_payment_url"
+	},
+	"Shopping Cart Settings": {
+		"validate": "moka.utils.validate_price_list_currency"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
