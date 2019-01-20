@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T19:37:19+03:00
+# @Last modified time: 2019-01-20T21:35:18+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -18,11 +18,7 @@ from moka.moka_checkout import validate_moka_credentials
 
 class MokaSettings(Document):
 	def validate(self):
-		if self.get("__islocal"):
-			self.validate_moka_credentials()
-
-	def validate_moka_credentials(self):
-		validate_moka_credentials(self, "validate_moka_credentials")
+		pass
 
 	def on_update(self):
 		create_payment_gateway_and_account()
