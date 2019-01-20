@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_checkout.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T21:27:55+03:00
+# @Last modified time: 2019-01-20T21:47:09+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -12,7 +12,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.utils import get_url
-from urllib import urlencode
+from urllib.parse import urlencode
 import urlparse, json
 from frappe import _
 from frappe.utils import get_request_session
