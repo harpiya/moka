@@ -4,7 +4,7 @@
 # @Project: Harpiya Kurumsal Yönetim Sistemi
 # @Filename: moka_settings.py
 # @Last modified by:   developer
-# @Last modified time: 2019-01-20T02:52:44+03:00
+# @Last modified time: 2019-01-20T14:08:14+03:00
 # @License: MIT License. See license.txt
 # @Copyright: Harpiya Yazılım Teknolojileri
 
@@ -230,12 +230,12 @@ class MokaSettings(Document):
 			}
 
 			# track ip for tranasction records
-			#if frappe.local.request_ip:
-			#	transaction_data.update({
-			#		"extra_options": {
-			#			"customer_ip": frappe.local.request_ip
-			#		}
-			#	})
+			if frappe.local.request_ip:
+				transaction_data.update({
+					"PaymentDealerRequest": {
+						"customer_ip": frappe.local.request_ip
+					}
+				})
 
 			# use card
 			# see: https://vcatalano.github.io/py-authorize/transaction.html
@@ -286,17 +286,11 @@ class MokaSettings(Document):
 			request.log_action(frappe.get_traceback(), "Error")
 			request.status = "Error"
 			error_msg = ""
-			errors = []
-
-			if iex.children and len(iex.children) > 0:
-				for field_error in iex.children:
-					print(field_error.asdict())
-					for field_name, error in field_error.asdict().iteritems():
-						errors.append(error)
+			errors = ""
 
 			error_msg = "\n".join(errors)
 
-			request.error_msg = error_msg
+			request.error_msg = result.get('ResultCode')
 
 		except MokaResponseError as ex:
 			# log moka server response errors
@@ -304,7 +298,7 @@ class MokaSettings(Document):
 			request.log_action(json.dumps(result), "Debug")
 			request.log_action(str(ex), "Error")
 			request.status = "Error"
-			request.error_msg = ex.text
+			request.error_msg = result.get('ResultCode')
 
 			redirect_message = str(ex)
 			if result and hasattr(result):
@@ -345,6 +339,7 @@ class MokaSettings(Document):
 			del self.process_data['modified']
 		if self.process_data.get('log'):
 			del self.process_data['log']
+
 
 		# sanitize card info
 		if self.process_data.get("card_info"):
