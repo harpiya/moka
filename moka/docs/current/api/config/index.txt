@@ -1,3 +1,0 @@
-paypal_integration.config.docs
-paypal_integration.config
-paypal_integration.config.setup
